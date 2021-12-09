@@ -1,3 +1,6 @@
+def invalido ():
+    print('comando invalido')
+    repetir()
 def arqres(N1,N2,eq,res):
     arquivo = open('rescalculadora.txt','a')
     if eq == '%':
@@ -5,7 +8,7 @@ def arqres(N1,N2,eq,res):
     elif eq.upper() == 'R':
         arquivo.write(f'raiz de {N1} = {res}'+'\n')
     elif eq.upper() == "B":
-        arquivo.write(f'o o numero {N1} em binario é = {res}'+'\n')
+        arquivo.write(f'o numero {N1} em binario é = {res}'+'\n')
     else:
         arquivo.write(f'{N1} {eq} {N2} = {res}'+'\n')
     arquivo.close()
@@ -35,7 +38,7 @@ def binario(N1):
     while N1 > 0:
         b += str(int(N1) % 2)
         N1 = N1 // 2
-    return b
+    return b[::-1]
 def soma(N1,N2):
     return N1 + N2
 def sub(N1,N2):
@@ -68,7 +71,7 @@ Resto de uma divisão ou modulo = (M)
 Porcentagem = (%)
 Raiz = (R)
 converter em binario (B)
- ''')
+''')
 
 
     if eq == '-':
@@ -86,8 +89,10 @@ converter em binario (B)
         res = mult(N1,N2)
         print(f'o resultado é: {N1} * {N2} = {res}')
         arqres(N1,N2,eq,res)
-    elif eq == '/'and N2 != 0:
+    elif eq == '/':
         N1, N2 = numeros()
+        if N2 == 0:
+            invalido()
         res = div(N1,N2)
         print(f'o resultado é: {N1} / {N2} = {res}')
         arqres(N1,N2,eq,res)
@@ -126,7 +131,7 @@ def repetir():
 você deseja fazer outro calculo?
 Se sim coloque S para Sim 
 Se não deseja coloque N para NÃO
-se desejar ver todos os resultados coloque R
+Se desejar ver todos os resultados coloque R
 ''')
     if calc_repetir.upper() == 'S':
         calculadora()
